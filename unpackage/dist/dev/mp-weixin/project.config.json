@@ -21,7 +21,24 @@
   "libVersion": "",
   "appid": "wxf2a6e6d7e73b1c37",
   "projectname": "hair-mini-v3",
-  "condition": {},
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": []
+    }
+  },
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2

@@ -1,9 +1,9 @@
 {
-  "navigationStyle": "custom",
   "usingComponents": {
     "up-navbar": "../../uni_modules/uview-plus/components/u-navbar/u-navbar",
     "up-checkbox": "../../uni_modules/uview-plus/components/u-checkbox/u-checkbox",
     "up-checkbox-group": "../../uni_modules/uview-plus/components/u-checkbox-group/u-checkbox-group",
-    "up-button": "../../uni_modules/uview-plus/components/u-button/u-button"
+    "up-button": "../../uni_modules/uview-plus/components/u-button/u-button",
+    "up-popup": "../../uni_modules/uview-plus/components/u-popup/u-popup"
   }
 }

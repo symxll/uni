@@ -4,5 +4,25 @@
   "setting": {
     "compileHotReLoad": false
   },
-  "libVersion": "3.5.6"
+  "libVersion": "3.5.6",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/login/index",
+          "pathName": "pages/login/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

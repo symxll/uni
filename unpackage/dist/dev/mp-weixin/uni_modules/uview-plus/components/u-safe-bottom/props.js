@@ -1,0 +1,1 @@
+"use strict";const e=require("../../libs/vue.js");require("../../libs/config/config.js");require("../u-datetime-picker/datetimePicker.js");require("../u-icon/icon.js");require("../u-link/link.js");require("../u-loading-icon/loadingIcon.js");require("../u-navbar/navbar.js");const r=e.defineMixin({props:{}});exports.props=r;
