@@ -1,8 +1,21 @@
 {
-  "pages": [
-    { "path": "pages/login/index" },
-    { "path": "pages/index/index" },
-    { "path": "pages/archives/index" }
+  "pages": [{
+      "path": "pages/login/index"
+    },
+    {
+      "path": "pages/index/index"
+    },
+    {
+      "path": "pages/archives/index"
+    },
+    {
+      "path": "pages/web-view/index",
+      "style": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "隐私协议",
+        "navigationBarBackgroundColor": "#fff"
+      }
+    }
   ],
   "globalStyle": {
     "navigationStyle": "custom"

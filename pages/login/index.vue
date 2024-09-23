@@ -10,11 +10,10 @@
       <view class="tip">
         <view class="flex-center">
           <up-checkbox-group :v-model="checkboxState">
-            <up-checkbox />同意用户服务协议及《隐私协议》
+            <up-checkbox />同意<text class="tip--highlight">用户服务协议</text>及<text class="tip--highlight" @click="jumpToPath">《隐私协议》</text>
           </up-checkbox-group>
         </view>
-        <up-button type="primary" icon="weixin-fill" open-type="getUserInfo" @getphonenumber="getphonenumber" @getuserinfo="getuserinfo"
-          text="微信授权登录" />
+        <up-button type="primary" icon="weixin-fill" open-type="getPhoneNumber" @getphonenumber="getphonenumber" text="微信授权登录" />
       </view>
     </view>
     <view class="flex-center">
@@ -23,39 +22,27 @@
         <view class="tac u-primary">其它人员登录入口</view>
       </view>
     </view>
-
-    <!-- 授权登录 -->
-    <up-popup :show="showDialog" mode="center" round="10" >
-
-    </up-popup>
   </view>
 </template>
 
 <script setup>
 import { ref } from "vue";
 
-const showDialog = ref(false);
-
 // 选中状态
 const checkboxState = ref(false);
 
-
-const openDialog = () => {
-  showDialog.value = true;
-};
-
-const closeDialog = () => {
-  showDialog.value = false;
-};
-
 const getphonenumber = (e) => {
   console.log(e);
+  uni.navigateTo({
+    url: '/pages/index/index'
+  })
 
 }
 
-const getuserinfo = (e) => {
-  console.log(e);
-
+const jumpToPath = () => {
+  uni.navigateTo({
+    url: '/pages/web-view/index'
+  })
 }
 
 </script>
@@ -112,5 +99,9 @@ const getuserinfo = (e) => {
 
 .tac {
   text-align: center;
+}
+
+.tip--highlight {
+  color: #3394FF;
 }
 </style>

@@ -2,7 +2,8 @@
   "pages": [
     "pages/login/index",
     "pages/index/index",
-    "pages/archives/index"
+    "pages/archives/index",
+    "pages/web-view/index"
   ],
   "window": {
     "navigationStyle": "custom"
