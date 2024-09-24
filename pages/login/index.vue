@@ -26,17 +26,43 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 // 选中状态
 const checkboxState = ref(false);
 
-const getphonenumber = (e) => {
-  console.log(e);
-  uni.navigateTo({
-    url: '/pages/index/index'
-  })
+/** 微信登录 */
+const wxlogin = async() => {
+  uni.login({
+    provider: 'weixin',
+    success: (res) => {
+      console.log(res);
+      const openid = "15113131654";
+      const userInfo = {
+        nickName: "测试",
+        avatarUrl: "https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJib1Zic3ic3"
+      }
+      uni.setStorageSync('openid', openid);
+      uni.setStorageSync('userInfo', userInfo);
+      console.log('存储成功:', openid, userInfo);
+    },
+  });
+}
 
+/** 获取用户手机号  */
+const getphonenumber = async(e) => {
+  console.log(e);
+  if(e.detail.errMsg === 'getPhoneNumber:ok') {
+    uni.showToast({title: '授权成功', icon: 'none'});
+    setTimeout(() => {
+      uni.navigateTo({
+        url: '/pages/index/index'
+      })
+    }, 500);
+  } else {
+    uni.showToast({title: '授权失败', icon: 'none'});
+    return;
+  }
 }
 
 const jumpToPath = () => {
@@ -44,6 +70,10 @@ const jumpToPath = () => {
     url: '/pages/web-view/index'
   })
 }
+
+onMounted(() => {
+  wxlogin();
+});
 
 </script>
 

@@ -95,8 +95,23 @@ const qrcodeSize = () => {
   rpx.value = (150 / 375) * systemInfo.screenWidth;
 }
 
+/** 读取缓存 */
+const getStorage = () => {
+  const openid = uni.getStorageSync('openid') | null;
+  const userInfo = uni.getStorageSync('userInfo') | null;
+  console.log('读取缓存:', openid, userInfo);
+  if (!openid && !userInfo) {
+    // 如果缓存中有 openid 和 userInfo，则跳转到 index 页面
+    uni.navigateTo({
+      url: '/pages/login/index'
+    });
+  }
+}
+
 onMounted(() => {
-  qrcodeSize()
+  getStorage();
+  wxlogin();
+  qrcodeSize();
 })
 
 

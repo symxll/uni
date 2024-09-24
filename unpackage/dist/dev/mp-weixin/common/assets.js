@@ -1,1 +1,1 @@
-"use strict";const t="/static/login/body.png",s="/static/login/head.png",o="/static/index/bg.png",i="/static/logo.png";exports._imports_0=t;exports._imports_0$1=o;exports._imports_0$2=i;exports._imports_1=s;
+"use strict";const t="/static/index/bg.png",s="/static/logo.png",o="/static/login/body.png",i="/static/login/head.png";exports._imports_0=t;exports._imports_0$1=s;exports._imports_0$2=o;exports._imports_1=i;
