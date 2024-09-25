@@ -1,9 +1,9 @@
 {
   "pages": [{
-      "path": "pages/login/index"
+      "path": "pages/index/index"
     },
     {
-      "path": "pages/index/index"
+      "path": "pages/login/index"
     },
     {
       "path": "pages/archives/index"

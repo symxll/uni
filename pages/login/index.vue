@@ -9,16 +9,17 @@
     <view class="flex-center">
       <view class="tip">
         <view class="flex-center">
-          <up-checkbox-group :v-model="checkboxState">
-            <up-checkbox />同意<text class="tip--highlight">用户服务协议</text>及<text class="tip--highlight" @click="jumpToPath">《隐私协议》</text>
+          <up-checkbox-group :v-model="checkState" @change="checkEvent">
+            <up-checkbox />同意<text class="tip--highlight">用户服务协议</text>及<text class="tip--highlight"
+              @click="jumpToPath">《隐私协议》</text>
           </up-checkbox-group>
         </view>
-        <up-button type="primary" icon="weixin-fill" open-type="getPhoneNumber" @getphonenumber="getphonenumber" text="微信授权登录" />
+        <up-button :disabled="!checkState" type="primary" icon="weixin-fill" :openType="checkState ? 'getPhoneNumber' : null" @getphonenumber="getphonenumber" text="微信授权登录" />
       </view>
     </view>
     <view class="flex-center">
       <view class="footer">
-        <view class="tac"> 华芯云集团湖北武中医疗科技 </view>
+        <view class="tac u-main-color"> 华芯云集团湖北武中医疗科技 </view>
         <view class="tac u-primary">其它人员登录入口</view>
       </view>
     </view>
@@ -29,10 +30,15 @@
 import { ref, onMounted } from "vue";
 
 // 选中状态
-const checkboxState = ref(false);
+const checkState = ref(false);
+
+const checkEvent = () => {
+  checkState.value = !checkState.value;
+  console.log(checkState.value);
+}
 
 /** 微信登录 */
-const wxlogin = async() => {
+const wxlogin = async () => {
   uni.login({
     provider: 'weixin',
     success: (res) => {
@@ -50,17 +56,18 @@ const wxlogin = async() => {
 }
 
 /** 获取用户手机号  */
-const getphonenumber = async(e) => {
+const getphonenumber = async (e) => {
   console.log(e);
-  if(e.detail.errMsg === 'getPhoneNumber:ok') {
-    uni.showToast({title: '授权成功', icon: 'none'});
+  console.log(checkState.value);
+  if (e.detail.errMsg === 'getPhoneNumber:ok') {
+    uni.showToast({ title: '授权成功', icon: 'none' });
     setTimeout(() => {
       uni.navigateTo({
         url: '/pages/index/index'
       })
     }, 500);
   } else {
-    uni.showToast({title: '授权失败', icon: 'none'});
+    uni.showToast({ title: '授权失败', icon: 'none' });
     return;
   }
 }

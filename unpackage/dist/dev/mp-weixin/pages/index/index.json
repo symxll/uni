@@ -3,7 +3,7 @@
     "up-navbar": "../../uni_modules/uview-plus/components/u-navbar/u-navbar",
     "up-button": "../../uni_modules/uview-plus/components/u-button/u-button",
     "up-icon": "../../uni_modules/uview-plus/components/u-icon/u-icon",
-    "up-popup": "../../uni_modules/uview-plus/components/u-popup/u-popup",
-    "uqrcode": "../../uni_modules/Sansnn-uQRCode/components/uqrcode/uqrcode"
+    "up-qrcode": "../../uni_modules/uview-plus/components/u-qrcode/u-qrcode",
+    "up-popup": "../../uni_modules/uview-plus/components/u-popup/u-popup"
   }
 }

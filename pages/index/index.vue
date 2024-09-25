@@ -10,8 +10,8 @@
             <image class="card-border_photo" :src="userPhoto" mode="aspectFill" />
           </view>
           <view class="user-info">
-            <view class="user-name">{{ userName }}</view>
-            <view class="h3">联系电话：{{ userPhone }}</view>
+            <view class="user-name">{{ userName || '~' }}</view>
+            <view class="h3">联系电话：{{ userPhone || '~' }}</view>
             <view class="flex-center">
               <view class="btn">
                 <up-button type="primary" size="mini" text="被检人员" />
@@ -45,14 +45,11 @@
     <up-popup :show="showDialog" mode="center" round="10" @open="openDialog" @close="closeDialog">
       <view class="dialog">
         <view class="flex">
-          <image class="dialog-photo" src="../../static/logo.png" mode="scaleToFit" />
-          <view class="dialog-title">
-            <view>{{ userName }}</view>
-            <view>{{ userPlace }}</view>
-          </view>
+          <image class="dialog-photo" src="/static/logo.png" mode="scaleToFit" />
+          <view class="dialog-title">{{ userName }}</view>
         </view>
         <view class="qrcode flex-center">
-          <uqrcode v-if="showDialog" ref="uqrcode" canvas-id="qrcode" :value="userPhone" :size="rpx"></uqrcode>
+           <up-qrcode v-if="showDialog" :size="qrCodeSize" val="userPhone" :icon="userPhoto"></up-qrcode>
         </view>
         <view class="date-time">{{ currentTime }}</view>
       </view>
@@ -61,16 +58,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import uqrcode from '../../uni_modules/Sansnn-uQRCode/components/uqrcode/uqrcode.vue';
-const userPhoto = ref("../../static/logo.png");
-const userName = ref("袁天伦");
-const userPlace = ref("湖北 武汉 光谷软件园C3栋");
-const userPhone = ref("12345678901");
+import { ref } from "vue";
+import { onLoad, onShow } from '@dcloudio/uni-app';
+
+const userPhoto = ref("/static/logo.png");
+const userName = ref("");
+const userPhone = ref("");
 const showDialog = ref(false);
-const rpx = ref(0);
+const qrCodeSize = ref(0);
 const currentTime = ref(uni.$u.timeFormat(new Date(), 'yyyy年mm月dd hh:MM:ss'));
-const interval = ref(0)
+const interval = ref(0);
 
 const jumpToPath = () => {
   uni.navigateTo({
@@ -79,6 +76,7 @@ const jumpToPath = () => {
 };
 
 const openDialog = () => {
+  qrcodeSize();
   interval.value = setInterval( () => {
     currentTime.value = uni.$u.timeFormat(new Date(), 'yyyy年mm月dd hh:MM:ss');
   }, 1000);
@@ -92,13 +90,13 @@ const closeDialog = () => {
 
 const qrcodeSize = () => {
   const systemInfo = uni.getSystemInfoSync();
-  rpx.value = (150 / 375) * systemInfo.screenWidth;
+  qrCodeSize.value = (150 / 375) * systemInfo.screenWidth;
 }
 
 /** 读取缓存 */
 const getStorage = () => {
-  const openid = uni.getStorageSync('openid') | null;
-  const userInfo = uni.getStorageSync('userInfo') | null;
+  const openid = uni.getStorageSync('openid') || null;
+  const userInfo = uni.getStorageSync('userInfo') || null;
   console.log('读取缓存:', openid, userInfo);
   if (!openid && !userInfo) {
     // 如果缓存中有 openid 和 userInfo，则跳转到 index 页面
@@ -108,13 +106,20 @@ const getStorage = () => {
   }
 }
 
-onMounted(() => {
+/** 监听资料修改 */
+const updataUserInfo = () => {
+  const formData = uni.getStorageSync('formData');
+  userPhone.value = formData[4].text;
+  userName.value = formData[0].text;
+}
+
+onLoad(() => {
   getStorage();
-  wxlogin();
-  qrcodeSize();
 })
 
-
+onShow(() => {
+  updataUserInfo();
+})
 </script>
 
 <style scoped>
