@@ -10,8 +10,8 @@
             <image class="card-border_photo" :src="userPhoto" mode="aspectFill" />
           </view>
           <view class="user-info">
-            <view class="user-name">{{ userName || '~' }}</view>
-            <view class="h3">联系电话：{{ userPhone || '~' }}</view>
+            <view class="user-name">{{ userName || '登录后查看~' }}</view>
+            <view class="h3">{{ userPhone ? `联系电话： ${userPhone}` : ' ' }}</view>
             <view class="flex-center">
               <view class="btn">
                 <up-button type="primary" size="mini" text="被检人员" />
@@ -108,9 +108,11 @@ const getStorage = () => {
 
 /** 监听资料修改 */
 const updataUserInfo = () => {
-  const formData = uni.getStorageSync('formData');
-  userPhone.value = formData[4].text;
-  userName.value = formData[0].text;
+  const formData = uni.getStorageSync('formData')
+  if(formData) {
+    userPhone.value = formData[4].text;
+    userName.value = formData[0].text;
+  }
 }
 
 onLoad(() => {
@@ -181,6 +183,7 @@ onShow(() => {
   top: 25%;
   display: grid;
   gap: 20rpx;
+  text-align: center;
 }
 
 .user-name {
